@@ -120,4 +120,6 @@ I open the image and...**THERE IS THE FLAG!**
 
 **FwordCTF{32d6c684f1e93d0ba67d4c865f1f757f}**
 
+*(Only 16 teams solved this challenge)*
+
 
