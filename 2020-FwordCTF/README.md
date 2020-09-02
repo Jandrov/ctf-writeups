@@ -64,7 +64,7 @@ So there are only two directories left. *$Extend* one is useless so I check *$RE
 
 After writing everything down to a summary file, I need to leave for some hours so I send my research to my teammates and ask them if someone can continue. After some hours, <a href="https://github.com/Zarkrosh">Zarkrosh</a> answers me saying that he could get the RSA Private Key using <a href="https://github.com/Ganapati/RsaCtfTool">this tool</a>. 
 
-```./RsaCtfTool.py --publickey ./key.pub --private``
+```./RsaCtfTool.py --publickey ./key.pub --private```
 
 Then, he tried to decrypt *secret_enc.enc* but it didn't work, so he realizes that *cipher* file 
 is the RSA encrypted one and the other one is the AES CBC 256. He asked me if I could continue from here, as he was solving other challenges and I already had a Jupyter notebook to solve those RSA challenges from a ciphertext in "long integer" format.
