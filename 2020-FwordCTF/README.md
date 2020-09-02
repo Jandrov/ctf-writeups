@@ -1,7 +1,8 @@
 # Write-up FwordCTF
 
-* [Forensics - NULL](#forensics---null)
 * [Forensics - Infection](#forensics---infection)
+* [Forensics - NULL](#forensics---null)  *SOON*
+
 
 
 
@@ -53,11 +54,11 @@ It has an uri so I enter and it is a <a href="https://docs.google.com/document/d
 
 So there are only two directories left. *$Extend* one is useless so I check *$RECYCLE.BIN*. Inside another directory there are 3 documents. I check the 2 text files and in the 2nd one, *$R4ZNK6Z.txt*, there are two pastebin urls that I decide to check. First one expired but the second one gives us the RSA Public Key.
 
-<p align="left">
+<p align="center">
   <img src="imgs/infection_6.png">
 </p>
 
-<p align="right">
+<p align="center">
   <img src="imgs/infection_7.png">
 </p>
 
