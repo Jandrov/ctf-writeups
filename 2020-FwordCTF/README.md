@@ -143,7 +143,7 @@ It can be seen that first byte is wrong as PNG file signature is **8950 4e47 0d0
   <img src="imgs/null_2.png">
 </p>
 
-Well, not everything, as I notice that the image dimensions are **0x0**. At this point I imagine that the challenge will be related to CRC, but let's check it with *pngcheck* (I always these flags but I guess they are not needed for this challenge).
+Well, not everything, as I notice that the image dimensions are **0x0**. At this point I imagine that the challenge will be related to CRC, but let's check it with *pngcheck* (I always use these flags but I guess they are not needed for this challenge).
 
 <p align="center">
   <img src="imgs/null_3.png">
@@ -151,7 +151,7 @@ Well, not everything, as I notice that the image dimensions are **0x0**. At this
 
 I noticed this because I already had experience with a challenge like this one, from another CTF some months ago. The challenge here is to find dimensions that match this CRC checksum, as something else would make the PNG open completely corrupted and without a way to see anything. I used <a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Structure.html">this page</a> to read about CRC and I saw that it doesn't count the length field. Then, I remembered that I found a really useful tool for this problem: <a href="https://github.com/resilar/crchack">crchack</a>
 
-I just needed to check once again how to use it correctly, by choosing which bytes I wanted to modify. Firstly I use *dd* to extract the 17 bytes that are used to calculate the CRC checksum. Then, I use the tool to modify 6th, 7th, 10th and 11th bytes, as image dimensions are usually there. Automatically, I get the result.
+I just needed to check once again how to use it correctly, by choosing which bytes I wanted to modify. Firstly I use *dd* to extract the 17 bytes that are used to calculate the CRC checksum. Then, I use the tool to modify 6th, 7th, 10th and 11th bytes, as image dimensions are usually there. The correct CRC is extracted from the output of pngcheck, or directly from the original bytes that are on NULL.png. Automatically, I get the result.
 
 <p align="center">
   <img src="imgs/null_4.png">
