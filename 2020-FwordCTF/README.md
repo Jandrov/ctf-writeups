@@ -9,7 +9,7 @@
 
 ## Forensics - Infection
 
-Archivos: <a href="http://download.fword.wtf/foren.E01">foren.E01</a>
+Files: <a href="http://download.fword.wtf/foren.E01">foren.E01</a>
 
 
 > My IT friend told me to highly secure my important files , but my pc got infected. Luckily i made an image of my disk. Can you help me retrieve my secret? PS : If you find a problem concerning the gofile upload, DM discord and mention from where you got the link !
@@ -125,7 +125,7 @@ I open the image and...**THERE IS THE FLAG!**
 
 ## Forensics - NULL
 
-Archivos: <a href="challs/NULL">NULL</a>
+Files: <a href="challs/NULL">NULL</a>
 
 <p align="center">
   <img src="imgs/Task.png">
