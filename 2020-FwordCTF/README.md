@@ -1,7 +1,7 @@
 # Write-up FwordCTF
 
 * [Forensics - Infection](#forensics---infection)
-* [Forensics - NULL](#forensics---null)  *SOON*
+* [Forensics - NULL](#forensics---null)
 
 
 
@@ -122,4 +122,48 @@ I open the image and...**THERE IS THE FLAG!**
 
 *(Only 16 teams solved this challenge)*
 
+
+## Forensics - NULL
+
+Archivos: <a href="challs/NULL">NULL</a>
+
+<p align="center">
+  <img src="imgs/Task.png">
+</p>
+
+The file seems to be corrupted so I open it with *hexeditor*. 
+
+<p align="center">
+  <img src="imgs/null_1.png">
+</p>
+
+It can be seen that first byte is wrong as PNG file signature is **8950 4e47 0d0a 1a0a** and we have **69** in the first byte. Then I read about <a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html">PNG signature</a> and I notice that **IHDR** chunk is also corrupted, as it is in lower case instead of upper case. I change **6968 6472** for **4948 4452** and everything else seems to be correct. 
+
+<p align="center">
+  <img src="imgs/null_2.png">
+</p>
+
+Well, not everything, as I notice that the image dimensions are **0x0**. At this point I imagine that the challenge will be related to CRC, but let's check it with *pngcheck* (I always these flags but I guess they are not needed for this challenge).
+
+<p align="center">
+  <img src="imgs/null_3.png">
+</p>
+
+I noticed this because I already had experience with a challenge like this one, from another CTF some months ago. The challenge here is to find dimensions that match this CRC checksum, as something else would make the PNG open completely corrupted and without a way to see anything. I used <a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Structure.html">this page</a> to read about CRC and I saw that it doesn't count the length field. Then, I remembered that I found a really useful tool for this problem: <a href="https://github.com/resilar/crchack">crchack</a>
+
+I just needed to check once again how to use it correctly, by choosing which bytes I wanted to modify. Firstly I use *dd* to extract the 17 bytes that are used to calculate the CRC checksum. Then, I use the tool to modify 6th, 7th, 10th and 11th bytes, as image dimensions are usually there. Automatically, I get the result.
+
+<p align="center">
+  <img src="imgs/null_4.png">
+</p>
+
+Now I only need to change those bytes using *hexeditor* again, save the file as <a href="imgs/solution.png">solution.png</a> and read the flag there!
+
+<p align="center">
+  <img src="imgs/solution.png">
+</p>
+
+**FwordCTF{crc32_is_the_way}**
+
+*(Funny fact is that I was the 2nd person that solved this challenge and I lost the first blood because I decided to go to eat dinner between noticing that it was a CRC challenge and actually solving it. At the end, 45 teams solved it)*
 
