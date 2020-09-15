@@ -10,7 +10,7 @@
   <img src="imgs/Task.PNG">
 </p>
 
-We see that the challenge runs on their server so we connect from our Kali machine. We are told to enter some plaintext and we get a ciphertext and a question whether it was encrypted with ECB or CBC. Then I started to try to get information about how their script works, as we didn't get any file on the challenge description. 
+We see that the challenge runs on their server so we connect from our Kali machine. We are told to enter some plaintext and we get a ciphertext and a question: *was it encrypted with ECB or CBC?*. Then I started to try to get information about how their script works, as we didn't get any file on the challenge description. 
 
 <p align="center">
   <img src="imgs/modus_operandi1.PNG">
