@@ -7,13 +7,13 @@
 ## Crypto - modus_operandi
 
 <p align="center">
-  <img src="imgs/Task.png">
+  <img src="imgs/Task.PNG">
 </p>
 
 We see that the challenge runs on their server so we connect from our Kali machine. We are told to enter some plaintext and we get a ciphertext and a question whether it was encrypted with ECB or CBC. Then I started to try to get information about how their script works, as we didn't get any file on the challenge description. 
 
 <p align="center">
-  <img src="imgs/modus_operandi1.png">
+  <img src="imgs/modus_operandi1.PNG">
 </p>
 
 I notice that the plaintext is irrelevant and writing the wrong option in the ECB/CBC question, makes the program to stop. Then I start trying to find a pattern and I see that the first sequence is like:
@@ -24,7 +24,7 @@ Then I realize that the sequence was more complex and I started to change the va
 To try this approach I decided to get more digits by hand (with those *if...else* on my script) until I could decrypt binary in <a href="https://gchq.github.io/CyberChef/#recipe=From_Binary('None')&input=MDExMDAxMTAwMTEwMTEwMDAxMTAwMDAxMDExMDAxMTEwMTExMTAxMQ">Cyberchef</a> and see that I was going in the right direction:
 
 <p align="center">
-  <img src="imgs/modus_operandi2.png">
+  <img src="imgs/modus_operandi2.PNG">
 </p>
 
 This is the moment when I decided to change my script to bruteforce the rest of the bits, just by appending 0 if it was ECB or 1 if it was CBC (it was useful to use the indexes of my array as I said before). If I made a mistake, then I reconnected again, taking advantage of all the previous bits I had already found.
@@ -32,14 +32,14 @@ This is the moment when I decided to change my script to bruteforce the rest of 
 It took around half an hour for my <a href=challs/modusv2.py>script</a> to find the flag in binary. This was the result:
 
 <p align="center">
-  <img src="imgs/modus_operandi3.png">
-  <img src="imgs/modus_operandi4.png">
+  <img src="imgs/modus_operandi3.PNG">
+  <img src="imgs/modus_operandi4.PNG">
 </p>
 
 So I just need to decrypt that binary string with <a href="https://gchq.github.io/CyberChef/#recipe=From_Binary('None')&input=MDExMDAxMTAwMTEwMTEwMDAxMTAwMDAxMDExMDAxMTEwMTExMTAxMTAxMDAwMTAxMDEwMDAwMTEwMTAwMDAxMDAxMDExMTExMDExMTAwMTAwMTEwMDEwMTAxMDAwMDAwMDExMDExMDAwMTEwMTEwMDAxMTExMDAxMDEwMTExMTEwMTExMDAxMTAxMDEwMTAxMDExMDAwMTEwMTEwMTAxMTAwMTAwMTAw">Cyberchef</a> again and we can see the flag. It doesn't have the closing curly bracket, but we can assume it.
 
 <p align="center">
-  <img src="imgs/solution.png">
+  <img src="imgs/solution.PNG">
 </p>
 
 **flag{ECB_re@lly_sUck$}**
