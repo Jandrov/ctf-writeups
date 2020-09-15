@@ -36,8 +36,8 @@ It took around half an hour for my <a href=challs/modusv2.py>script</a> to find 
   <img src="imgs/modus_operandi4.PNG">
 </p>
 
-So I just need to decrypt that binary string with <a href="https://gchq.github.io/CyberChef/#recipe=From_Binary('None')&input=MDExMDAxMTAwMTEwMTEwMDAxMTAwMDAxMDExMDAxMTEwMTExMTAxMTAxMDAwMTAxMDEwMDAwMTEwMTAwMDAxMDAxMDExMTExMDExMTAwMTAwMTEwMDEwMTAxMDAwMDAwMDExMDExMDAwMTEwMTEwMDAxMTExMDAxMDEwMTExMTEwMTExMDAxMTAxMDEwMTAxMDExMDAwMTEwMTEwMTAxMTAwMTAwMTAw">Cyberchef</a> again and we can see the flag. It doesn't have the closing curly bracket, but we can assume it.
-
+So I just need to decrypt that binary string with <a href="https://gchq.github.io/CyberChef/#recipe=From_Binary('None')&input=MDExMDAxMTAwMTEwMTEwMDAxMTAwMDAxMDExMDAxMTEwMTExMTAxMTAxMDAwMTAxMDEwMDAwMTEwMTAwMDAxMDAxMDExMTExMDExMTAwMTAwMTEwMDEwMTAxMDAwMDAwMDExMDExMDAwMTEwMTEwMDAxMTExMDAxMDEwMTExMTEwMTExMDAxMTAxMDEwMTAxMDExMDAwMTEwMTEwMTAxMTAwMTAwMTAwMDExMTExMDE">Cyberchef</a> again and we can see the flag. Length is 175 so the last bit is missing (it should be multiple of 8) and it must be a 1 in order to get the closing curly bracket.
+ 
 <p align="center">
   <img src="imgs/solution.PNG">
 </p>
