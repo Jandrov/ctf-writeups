@@ -6,13 +6,13 @@
 This was a <a href="http://155.138.239.104:8000/">short CTF</a> that one teammate told me about, as the prize for the winner was one year of VIP in HTB. It was late here in Spain but I decided to take part in the competition. It turned out to be interesting and I ended up 2nd with 800 points, just 100 points behind the winner. Only a few people solved some challenges: I started with Stego one but after getting stacked at some point, I changed to *Codebook* one and solved it. I was 3rd after 2 people that solved Stego one (it had more points). After that, this was the sequence...
 
 <p align="center">
-  <img src="imgs/result1.PNG">
+  <img src="imgs/result1.jpg">
 </p>
 
 I solved *babystack* 10 minutes before the deadline and I was in the first position! But it didn't last so long...
 
 <p align="center">
-  <img src="imgs/result2.PNG">
+  <img src="imgs/result2.jpg">
 </p>
 
 5 minutes after that, *th3d00msl4y3r* uploaded another flag and defeated me.  I was only one step away in the stego challenge from getting the prize! :( 
