@@ -85,7 +85,7 @@ I get an image, so let's open it.
   <img src="challs/photo.jpg">
 </p>
 
-There is a text that looks encrypted with just a rotation cipher. I write it on <a href="https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,11)&input=QXAgcmFwa3QgdGhpcCB1Z3RjaXQgcCBpamggZHlkaA">CyberChef</a> and it is decrypted with **ROT11** as *La clave esta frente a tus ojos* (in English *The key is in front of your eyes*). It made me think that there was a password protected file inside the image. But what was the password?
+There is a text that looks encrypted with just a rotation cipher. I write it on <a href="https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,11)&input=QXAgcmFwa3QgdGhpcCB1Z3RjaXQgcCBpamggZHlkaA">CyberChef</a> and it is decrypted with **ROT11** as *La clave esta frente a tus ojos* (in English: *The key is in front of your eyes*). It made me think that there was a password-protected file inside the image. But what was the password?
 
 If we see the image, it shows a map of a region of the *<a href="https://en.wikipedia.org/wiki/Beleriand">Middle-earth</a>*, from *The Lord of the Rings* (I am not into LOTR, but I just googled the first name I saw on the map: Beleriand). Nothing seems clear, so I guessed that one of those names would be the password. I wasn't sure how to automate the process, so I just tried each name until I found that the password was **TALATH**. 
 
@@ -93,19 +93,19 @@ If we see the image, it shows a map of a region of the *<a href="https://en.wiki
   <img src="imgs/stego2.PNG">
 </p>
 
-I said "each name" because unfortunately I think I tried almost each of them before this one, I don't know why I chose that order... We get a text file and luckily this time I didn't waste a minute as I recognized the steganography technique at first glance: <a href="https://dl.packetstormsecurity.net/crypt/snow/description.html">**SNOW**</a>. It is easy to notice if you see the tabs and spaces on each line (just for the record, I also checked where that text came from and it was from *A Clockwork Orange* in Spanish).
+I said "each name" because unfortunately I think I tried almost each of them before this one, I don't know why I chose that order... We get a text file and luckily this time I didn't waste a minute as I recognized the steganography technique at first glance: <a href="https://dl.packetstormsecurity.net/crypt/snow/description.html">**SNOW**</a>. It is easy to notice if you see the tabs and spaces on each line (just for the record, I also checked where that text came from and it was from *La Naranja Mecánica*, the Spanish version of *A Clockwork Orange*).
 
 <p align="center">
   <img src="imgs/stego3.PNG">
 </p>
 
-I extract the hidden text with **stegsnow** as you can see for example <a href="https://delightlylinux.wordpress.com/2016/12/14/hide-text-in-text-files-using-stegsnow/">here</a>:
+I extract the hidden text with **stegsnow** (you can read more about it <a href="https://delightlylinux.wordpress.com/2016/12/14/hide-text-in-text-files-using-stegsnow/">here</a>):
 
 <p align="center">
   <img src="imgs/stego4.PNG">
 </p>
 
-It is a <a href="https://github.com/uroven4/random">GitHub repository</a>, so let's check it. This is where the challenged started to have some parts of OSINT. There are 4 "hello world" files that doesn't seem to have anything interesting, so I check the commits and I find a couple with useful information. First one shows a link to an <a href="https://www.flickr.com/photos/189491566@N04/50160413911/">image on Flickr</a> and second one gives a future advice: 
+It is a <a href="https://github.com/uroven4/random">GitHub repository</a>, so let's check it. This is where the challenge started to have some parts of OSINT. There are 4 "hello world" files that don't seem to have anything interesting, so I check the commits and I find a couple with useful information. First one shows a link to an <a href="https://www.flickr.com/photos/189491566@N04/50160413911/">image on Flickr</a> and second one gives a future advice. Translated to English it says: 
 
 > I come from the future to give you an advice.
 > When you finish your journey, you must reduce the distances of what you are looking for.
@@ -124,8 +124,7 @@ I download the image from Flickr and I don't see anything useful opening it this
 Here I got stacked for a while, as I was just trying to log into a Gmail, CTF or GitHub account with the email address *aesedeefegehachejotaka@gmail.com*. Eventually, I was suggested to send an email to this address and this was the way. It automatically replies you with an email containing the next part of the challenge. 
 
 <p align="center">
-  <img src="imgs/stego8.PNG">
-  "I won't help you with anything else"
+  <img src="imgs/stego8.PNG" title="I won't help you with anything else">
 </p>
 
 There are two links there. <a href="https://drive.google.com/file/d/1zHCTo2EQtb-C8CD-4L11byTSJxFp6K-7/view?usp=sharing">Firstly</a> to a file on Google Drive that I download and it turns out to be a zip file. <a href="https://en.wikipedia.org/wiki/Peter_Agre">Second</a> one is the Wikipedia site of an American physician, Nobel Laureate, and molecular biologist: Peter Agre. I didn't know what to do with the second link, so I repeated the same process than at the beginning of the challenge with the zip file and I extracted <a href="challs/pentagram.jpg">pentagram.jpg</a>. 
@@ -142,7 +141,7 @@ It contains this text, that clearly looks like **Base64** encoded:
 QE5dLGhATl0sZ0A6Qz9nK0NcYmcrQ1NcZSQ9UkBQQDNCI2dAM0IiZEAzQiJkQFVgZVUrQ1xiJUA6RVlSK0NcYWRAOkVZUytDU1xlK0NcZWgrQ1FDJUAzQXVmQE5dKWZAMSRFY0BVV15nQFVVQmZAVWBkaEBVVUJnQDo8UmVAOjxST0BVV19UK0NcYmdATl0sJkA6PFVmQFVVQmdAOkJSUUBVYGRoQFVVQmdAVV5IZytDXGFkQFVVQmZAVVdeZ0BVVUJmQDpFXFNAMSRJUEA6Qz9nK0NcYmcrQ1NcZSQ9W0ZRQE5dLGcrQ1NcJEBOXSlnK0NRQyRAOjlMT0BVXkhoK0NTX2ZATl0saCtDXGJnJD1SQFBAM0IjZ0AzQiJkQFVVQmdAVVVCZkBMP09RK0NTXGUkPVtJUkBOXSxnK0NcZWgkPVAmZCtDXGJnK0NTXCRAVV5IZ0BOXSxnK0NTX2crQ1NcZSQ9W0lRQDo6OWVAOkVcVCQ9UkBQQFVdW1JAOjxSZUA6PFNRQE5dLGhAOjxST0BVV15nQDo8VlNATl0pZ0BVYGRSQDo6OWZAVWBlVStDXGVoQDo5TFBAOjxTUStDU19nQFVdW1JAVVdcUitDXGVnQDo5TFBAVVdcUitDU1xmQFVdW1JAOjxTUStDU19nQFVdW1FAVV5IaCtDU1xlQFVdW1JAVVdcUitDU1xlQDpCUlFAOkVbZ0A6PFZTQE5dLGhAVVdbUEA6RVxUQEw/UlJAVWBkaEBVYGVUQDEkRk9AOkVbUUA6PFZTQEs=
 ```
 
-I start decrypting with CyberChef again and I get stacked for a while after first base64 decoding. Eventually, after several trials, I decode it with **Base85** and the text only contains letters *a* and *b*. Then, while I am trying something similar, Zarkrosh tells me that replacing **a with -** and **b with .** you can decode it from **Morse** and get a readable Spanish message. Here there is the decryption <a href="https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true)From_Base85('!-u')Find_/_Replace(%7B'option':'Regex','string':'b'%7D,'.',true,false,true,false)Find_/_Replace(%7B'option':'Regex','string':'a'%7D,'-',true,false,true,false)From_Morse_Code('Space','Line%20feed')&input=UUU1ZExHaEFUbDBzWjBBNlF6OW5LME5jWW1jclExTmNaU1E5VWtCUVFETkNJMmRBTTBJaVpFQXpRaUprUUZWZ1pWVXJRMXhpSlVBNlJWbFNLME5jWVdSQU9rVlpVeXREVTF4bEswTmNaV2dyUTFGREpVQXpRWFZtUUU1ZEtXWkFNU1JGWTBCVlYxNW5RRlZWUW1aQVZXQmthRUJWVlVKblFEbzhVbVZBT2p4U1QwQlZWMTlVSzBOY1ltZEFUbDBzSmtBNlBGVm1RRlZWUW1kQU9rSlNVVUJWWUdSb1FGVlZRbWRBVlY1SVp5dERYR0ZrUUZWVlFtWkFWVmRlWjBCVlZVSm1RRHBGWEZOQU1TUkpVRUE2UXo5bkswTmNZbWNyUTFOY1pTUTlXMFpSUUU1ZExHY3JRMU5jSkVCT1hTbG5LME5SUXlSQU9qbE1UMEJWWGtob0swTlRYMlpBVGwwc2FDdERYR0puSkQxU1FGQkFNMElqWjBBelFpSmtRRlZWUW1kQVZWVkNaa0JNUDA5UkswTlRYR1VrUFZ0SlVrQk9YU3huSzBOY1pXZ2tQVkFtWkN0RFhHSm5LME5UWENSQVZWNUlaMEJPWFN4bkswTlRYMmNyUTFOY1pTUTlXMGxSUURvNk9XVkFPa1ZjVkNROVVrQlFRRlZkVzFKQU9qeFNaVUE2UEZOUlFFNWRMR2hBT2p4U1QwQlZWMTVuUURvOFZsTkFUbDBwWjBCVllHUlNRRG82T1daQVZXQmxWU3REWEdWb1FEbzVURkJBT2p4VFVTdERVMTluUUZWZFcxSkFWVmRjVWl0RFhHVm5RRG81VEZCQVZWZGNVaXREVTF4bVFGVmRXMUpBT2p4VFVTdERVMTluUUZWZFcxRkFWVjVJYUN0RFUxeGxRRlZkVzFKQVZWZGNVaXREVTF4bFFEcENVbEZBT2tWYlowQTZQRlpUUUU1ZExHaEFWVmRiVUVBNlJWeFVRRXcvVWxKQVZXQmthRUJWWUdWVVFERWtSazlBT2tWYlVVQTZQRlpUUUVzPQ">all-in-one</a>.
+I start decrypting with CyberChef again and I get stacked for a while after first base64 decoding. Eventually, after several trials, I decode it with **Base85** and the text only contains letters *a* and *b*. Then, while I am trying something similar, Zarkrosh tells me that after replacing **a with -** and **b with .** you can decode it from **Morse** and get a readable Spanish message. Here there is the decryption <a href="https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true)From_Base85('!-u')Find_/_Replace(%7B'option':'Regex','string':'b'%7D,'.',true,false,true,false)Find_/_Replace(%7B'option':'Regex','string':'a'%7D,'-',true,false,true,false)From_Morse_Code('Space','Line%20feed')&input=UUU1ZExHaEFUbDBzWjBBNlF6OW5LME5jWW1jclExTmNaU1E5VWtCUVFETkNJMmRBTTBJaVpFQXpRaUprUUZWZ1pWVXJRMXhpSlVBNlJWbFNLME5jWVdSQU9rVlpVeXREVTF4bEswTmNaV2dyUTFGREpVQXpRWFZtUUU1ZEtXWkFNU1JGWTBCVlYxNW5RRlZWUW1aQVZXQmthRUJWVlVKblFEbzhVbVZBT2p4U1QwQlZWMTlVSzBOY1ltZEFUbDBzSmtBNlBGVm1RRlZWUW1kQU9rSlNVVUJWWUdSb1FGVlZRbWRBVlY1SVp5dERYR0ZrUUZWVlFtWkFWVmRlWjBCVlZVSm1RRHBGWEZOQU1TUkpVRUE2UXo5bkswTmNZbWNyUTFOY1pTUTlXMFpSUUU1ZExHY3JRMU5jSkVCT1hTbG5LME5SUXlSQU9qbE1UMEJWWGtob0swTlRYMlpBVGwwc2FDdERYR0puSkQxU1FGQkFNMElqWjBBelFpSmtRRlZWUW1kQVZWVkNaa0JNUDA5UkswTlRYR1VrUFZ0SlVrQk9YU3huSzBOY1pXZ2tQVkFtWkN0RFhHSm5LME5UWENSQVZWNUlaMEJPWFN4bkswTlRYMmNyUTFOY1pTUTlXMGxSUURvNk9XVkFPa1ZjVkNROVVrQlFRRlZkVzFKQU9qeFNaVUE2UEZOUlFFNWRMR2hBT2p4U1QwQlZWMTVuUURvOFZsTkFUbDBwWjBCVllHUlNRRG82T1daQVZXQmxWU3REWEdWb1FEbzVURkJBT2p4VFVTdERVMTluUUZWZFcxSkFWVmRjVWl0RFhHVm5RRG81VEZCQVZWZGNVaXREVTF4bVFGVmRXMUpBT2p4VFVTdERVMTluUUZWZFcxRkFWVjVJYUN0RFUxeGxRRlZkVzFKQVZWZGNVaXREVTF4bFFEcENVbEZBT2tWYlowQTZQRlpUUUU1ZExHaEFWVmRiVUVBNlJWeFVRRXcvVWxKQVZXQmthRUJWWUdWVVFERWtSazlBT2tWYlVVQTZQRlpUUUVzPQ">all-in-one</a>.
 
 And this is the result and the last step of the challenge that I couldn't solve in time :(
 
@@ -153,7 +152,7 @@ In English it is:
 > I HOPE IT WAS HARD FOR YOU TO GET HERE, BUT I AM SORRY TO SAY THAT YOU HAVEN'T FINISHED YET 27 7 J92 R76 M53 16 22 27 16 DE8 29 L73 6 53 8 7
 
 
-So the ciphertext seems to be **27 7 J92 R76 M53 16 22 27 16 DE8 29 L73 6 53 8 7**. Time was running out and we didn't find the solution, so as I explained before, during this time, Zarkrosh and I solved the pwn challenge *babystack* and I lost the first position in a matter of minutes. But what was the last step? The answer was related to our former scientist!
+So the ciphertext seems to be **27 7 J92 R76 M53 16 22 27 16 DE8 29 L73 6 53 8 7**. Time was running out and we didn't find the solution, so as I explained before, during this time, Zarkrosh and I solved the pwn challenge *babystack* so I was winning, but then I lost the first position in a matter of minutes. But what was the last step? The answer was related to our former scientist!
 
 The text was encrypted using **periodic table cipher**. I didn't know this one existed, but just using for example the tool in dcode.fr you can get the solution:
 
