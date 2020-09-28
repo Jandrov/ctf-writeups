@@ -60,3 +60,57 @@ Writing the script <a href="challs/solve.py">solve.py</a> didn't take me too lon
 **FLAG{ECB_IS_NOT_SECURE}**
 
 
+## Stego - Keep Trying
+
+Files: <a href="challs/photo.zip">photo.zip</a>
+
+<p align="center">
+  <img src="imgs/stego_task.PNG">
+</p>
+
+> Do you like stego. I hope that. You already know what to do.
+> When you find the flag, use the following format: FLAG{INSERTFLAGHERE}"
+
+I need to say that this challenge was the longest in stego I've ever had, but well, kind of entertaining though :)
+
+We get a zip file that firstly I check with `7z l photo.zip` and then I extract with `7z x photo.zip`. Whatever decompressing tool is valid. I also checked if the zip had a comment with `zipnote photo.zip`, but nothing was found. 
+
+<p align="center">
+  <img src="imgs/stego1.PNG">
+</p>
+
+I get an image, so let's open it.
+
+<p align="center">
+  <img src="challs/photo.jpg">
+</p>
+
+There is a text that looks encrypted with just a rotation cipher. I write it on <a href="https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,11)&input=QXAgcmFwa3QgdGhpcCB1Z3RjaXQgcCBpamggZHlkaA">Cyberchef</a> and it is decrypted with **ROT11** as *La clave esta frente a tus ojos* (in English *The key is in front of your eyes*). It made me think that there was a password protected file inside the image. But what was the password?
+
+If we see the image, it shows a map of a region of the *<a href="https://en.wikipedia.org/wiki/Beleriand">Middle-earth</a>*, from *The Lord of the Rings* (I am not into LOTR, but I just googled the first name I saw on the map). Nothing seems clear, so I guessed that one of those names would be the password. I wasn't sure how to automate the process, so I just tried each name until I found that the password was **TALATH**. 
+
+<p align="center">
+  <img src="imgs/stego2.PNG">
+</p>
+
+I said "each name" because unfortunately I think I tried almost each of them before this one, I don't know why I chose that order... We get a text file and luckily this time I didn't waste a minute as I recognized the steganography technique at first glance: <a href="https://dl.packetstormsecurity.net/crypt/snow/description.html">**SNOW**</a>. It is easy to notice if you see the tabs and spaces on each line (just for the record, I also checked where that text came from and it was from *A Clockwork Orange* in Spanish).
+
+<p align="center">
+  <img src="imgs/stego3.PNG">
+</p>
+
+I extract the hidden text with **stegsnow** as you can see for example <a href="https://delightlylinux.wordpress.com/2016/12/14/hide-text-in-text-files-using-stegsnow/">here</a>:
+
+<p align="center">
+  <img src="imgs/stego4.PNG">
+</p>
+
+It is a <a href="https://github.com/uroven4/random">GitHub repository</a>, so let's check it. This is where the challenged started to have some parts of OSINT. There are 4 "hello world" files that doesn't seem to have anything interesting, so I check the commits and I find a couple with useful information. First one shows a link to an <a href="https://www.flickr.com/photos/189491566@N04/50160413911/">image on Flickr</a> and second one gives a future advice: 
+
+> I come from the future to give you an advice.
+> When you finish your journey, you must reduce the distances of what you are looking for.
+
+<p align="center">
+  <img src="imgs/stego5.PNG">
+  <img src="imgs/stego6.PNG">
+</p>
