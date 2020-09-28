@@ -128,7 +128,7 @@ Here I got stacked for a while, as I was just trying to log into a Gmail, CTF or
   "I won't help you with anything else"
 </p>
 
-There are two links there. <a href="https://drive.google.com/file/d/1zHCTo2EQtb-C8CD-4L11byTSJxFp6K-7/view?usp=sharing">Firstly</a> to a file on Google Drive that I download and it turns out to be a zip file. <a href="https://en.wikipedia.org/wiki/Peter_Agre">Second</a> one is the Wikipedia site of a famous physician. I didn't know what to do with the second link, so I repeated the same process than at the beginning of the challenge with the zip file and I extracted <a href="challs/pentagram.jpg">pentagram.jpg</a>. 
+There are two links there. <a href="https://drive.google.com/file/d/1zHCTo2EQtb-C8CD-4L11byTSJxFp6K-7/view?usp=sharing">Firstly</a> to a file on Google Drive that I download and it turns out to be a zip file. <a href="https://en.wikipedia.org/wiki/Peter_Agre">Second</a> one is the Wikipedia site of an American physician, Nobel Laureate, and molecular biologist: Peter Agre. I didn't know what to do with the second link, so I repeated the same process than at the beginning of the challenge with the zip file and I extracted <a href="challs/pentagram.jpg">pentagram.jpg</a>. 
 
 This time I get a <a href="https://pastebin.com/LjAxp6Mp">pastebin link</a> just by checking the metadata with *exiftool*.
 
@@ -142,6 +142,30 @@ It contains this text, that clearly looks like **Base64** encoded:
 QE5dLGhATl0sZ0A6Qz9nK0NcYmcrQ1NcZSQ9UkBQQDNCI2dAM0IiZEAzQiJkQFVgZVUrQ1xiJUA6RVlSK0NcYWRAOkVZUytDU1xlK0NcZWgrQ1FDJUAzQXVmQE5dKWZAMSRFY0BVV15nQFVVQmZAVWBkaEBVVUJnQDo8UmVAOjxST0BVV19UK0NcYmdATl0sJkA6PFVmQFVVQmdAOkJSUUBVYGRoQFVVQmdAVV5IZytDXGFkQFVVQmZAVVdeZ0BVVUJmQDpFXFNAMSRJUEA6Qz9nK0NcYmcrQ1NcZSQ9W0ZRQE5dLGcrQ1NcJEBOXSlnK0NRQyRAOjlMT0BVXkhoK0NTX2ZATl0saCtDXGJnJD1SQFBAM0IjZ0AzQiJkQFVVQmdAVVVCZkBMP09RK0NTXGUkPVtJUkBOXSxnK0NcZWgkPVAmZCtDXGJnK0NTXCRAVV5IZ0BOXSxnK0NTX2crQ1NcZSQ9W0lRQDo6OWVAOkVcVCQ9UkBQQFVdW1JAOjxSZUA6PFNRQE5dLGhAOjxST0BVV15nQDo8VlNATl0pZ0BVYGRSQDo6OWZAVWBlVStDXGVoQDo5TFBAOjxTUStDU19nQFVdW1JAVVdcUitDXGVnQDo5TFBAVVdcUitDU1xmQFVdW1JAOjxTUStDU19nQFVdW1FAVV5IaCtDU1xlQFVdW1JAVVdcUitDU1xlQDpCUlFAOkVbZ0A6PFZTQE5dLGhAVVdbUEA6RVxUQEw/UlJAVWBkaEBVYGVUQDEkRk9AOkVbUUA6PFZTQEs=
 ```
 
-I start decrypting with CyberChef again and I get stacked for a while after first base64 decoding. Eventually, after several trials, I decode it with **Base85** and the text has just letters *a* and *b*. Then, while I am trying something similar, Zarkrosh tells me that replacing **a with -** and **b with .** you can decode it from **Morse** and get a readable Spanish message. Here there is the decryption <a href="https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true)From_Base85('!-u')Find_/_Replace(%7B'option':'Regex','string':'b'%7D,'.',true,false,true,false)Find_/_Replace(%7B'option':'Regex','string':'a'%7D,'-',true,false,true,false)From_Morse_Code('Space','Line%20feed')&input=UUU1ZExHaEFUbDBzWjBBNlF6OW5LME5jWW1jclExTmNaU1E5VWtCUVFETkNJMmRBTTBJaVpFQXpRaUprUUZWZ1pWVXJRMXhpSlVBNlJWbFNLME5jWVdSQU9rVlpVeXREVTF4bEswTmNaV2dyUTFGREpVQXpRWFZtUUU1ZEtXWkFNU1JGWTBCVlYxNW5RRlZWUW1aQVZXQmthRUJWVlVKblFEbzhVbVZBT2p4U1QwQlZWMTlVSzBOY1ltZEFUbDBzSmtBNlBGVm1RRlZWUW1kQU9rSlNVVUJWWUdSb1FGVlZRbWRBVlY1SVp5dERYR0ZrUUZWVlFtWkFWVmRlWjBCVlZVSm1RRHBGWEZOQU1TUkpVRUE2UXo5bkswTmNZbWNyUTFOY1pTUTlXMFpSUUU1ZExHY3JRMU5jSkVCT1hTbG5LME5SUXlSQU9qbE1UMEJWWGtob0swTlRYMlpBVGwwc2FDdERYR0puSkQxU1FGQkFNMElqWjBBelFpSmtRRlZWUW1kQVZWVkNaa0JNUDA5UkswTlRYR1VrUFZ0SlVrQk9YU3huSzBOY1pXZ2tQVkFtWkN0RFhHSm5LME5UWENSQVZWNUlaMEJPWFN4bkswTlRYMmNyUTFOY1pTUTlXMGxSUURvNk9XVkFPa1ZjVkNROVVrQlFRRlZkVzFKQU9qeFNaVUE2UEZOUlFFNWRMR2hBT2p4U1QwQlZWMTVuUURvOFZsTkFUbDBwWjBCVllHUlNRRG82T1daQVZXQmxWU3REWEdWb1FEbzVURkJBT2p4VFVTdERVMTluUUZWZFcxSkFWVmRjVWl0RFhHVm5RRG81VEZCQVZWZGNVaXREVTF4bVFGVmRXMUpBT2p4VFVTdERVMTluUUZWZFcxRkFWVjVJYUN0RFUxeGxRRlZkVzFKQVZWZGNVaXREVTF4bFFEcENVbEZBT2tWYlowQTZQRlpUUUU1ZExHaEFWVmRiVUVBNlJWeFVRRXcvVWxKQVZXQmthRUJWWUdWVVFERWtSazlBT2tWYlVVQTZQRlpUUUVzPQ">all-in-one</a>.
+I start decrypting with CyberChef again and I get stacked for a while after first base64 decoding. Eventually, after several trials, I decode it with **Base85** and the text only contains letters *a* and *b*. Then, while I am trying something similar, Zarkrosh tells me that replacing **a with -** and **b with .** you can decode it from **Morse** and get a readable Spanish message. Here there is the decryption <a href="https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true)From_Base85('!-u')Find_/_Replace(%7B'option':'Regex','string':'b'%7D,'.',true,false,true,false)Find_/_Replace(%7B'option':'Regex','string':'a'%7D,'-',true,false,true,false)From_Morse_Code('Space','Line%20feed')&input=UUU1ZExHaEFUbDBzWjBBNlF6OW5LME5jWW1jclExTmNaU1E5VWtCUVFETkNJMmRBTTBJaVpFQXpRaUprUUZWZ1pWVXJRMXhpSlVBNlJWbFNLME5jWVdSQU9rVlpVeXREVTF4bEswTmNaV2dyUTFGREpVQXpRWFZtUUU1ZEtXWkFNU1JGWTBCVlYxNW5RRlZWUW1aQVZXQmthRUJWVlVKblFEbzhVbVZBT2p4U1QwQlZWMTlVSzBOY1ltZEFUbDBzSmtBNlBGVm1RRlZWUW1kQU9rSlNVVUJWWUdSb1FGVlZRbWRBVlY1SVp5dERYR0ZrUUZWVlFtWkFWVmRlWjBCVlZVSm1RRHBGWEZOQU1TUkpVRUE2UXo5bkswTmNZbWNyUTFOY1pTUTlXMFpSUUU1ZExHY3JRMU5jSkVCT1hTbG5LME5SUXlSQU9qbE1UMEJWWGtob0swTlRYMlpBVGwwc2FDdERYR0puSkQxU1FGQkFNMElqWjBBelFpSmtRRlZWUW1kQVZWVkNaa0JNUDA5UkswTlRYR1VrUFZ0SlVrQk9YU3huSzBOY1pXZ2tQVkFtWkN0RFhHSm5LME5UWENSQVZWNUlaMEJPWFN4bkswTlRYMmNyUTFOY1pTUTlXMGxSUURvNk9XVkFPa1ZjVkNROVVrQlFRRlZkVzFKQU9qeFNaVUE2UEZOUlFFNWRMR2hBT2p4U1QwQlZWMTVuUURvOFZsTkFUbDBwWjBCVllHUlNRRG82T1daQVZXQmxWU3REWEdWb1FEbzVURkJBT2p4VFVTdERVMTluUUZWZFcxSkFWVmRjVWl0RFhHVm5RRG81VEZCQVZWZGNVaXREVTF4bVFGVmRXMUpBT2p4VFVTdERVMTluUUZWZFcxRkFWVjVJYUN0RFUxeGxRRlZkVzFKQVZWZGNVaXREVTF4bFFEcENVbEZBT2tWYlowQTZQRlpUUUU1ZExHaEFWVmRiVUVBNlJWeFVRRXcvVWxKQVZXQmthRUJWWUdWVVFERWtSazlBT2tWYlVVQTZQRlpUUUVzPQ">all-in-one</a>.
 
-   
+And this is the result and the last step of the challenge that I couldn't solve in time :(
+
+> ESPERO QUE TE HAYA COSTADO TRABAJO LLEGAR HASTA ACA, PERO LAMENTO DECIR QUE AUN NO HAS TERMINADO 27 7 J92 R76 M53 16 22 27 16 DE8 29 L73 6 53 8 7
+
+In English it is:
+
+> I HOPE IT WAS HARD FOR YOU TO GET HERE, BUT I AM SORRY TO SAY THAT YOU HAVEN'T FINISHED YET 27 7 J92 R76 M53 16 22 27 16 DE8 29 L73 6 53 8 7
+
+
+So the ciphertext seems to be **27 7 J92 R76 M53 16 22 27 16 DE8 29 L73 6 53 8 7**. Time was running out and we didn't find the solution, so as I explained before, during this time, Zarkrosh and I solved the pwn challenge *babystack* and I lost the first position in a matter of minutes. But what was the last step? The answer was related to our former scientist!
+
+The text was encrypted using **periodic table cipher**. I didn't know this one existed, but just using for example the tool in dcode.fr you can get the solution:
+
+<p align="center">
+  <img src="imgs/stego_solution.PNG">
+</p>
+
+To finish and get the flag we need to follow the previous advice we saw on GitHub: 
+
+> I come from the future to give you an advice.
+> When you finish your journey, you must reduce the distances of what you are looking for.
+
+Although it is quite obvious if you understand Spanish, but we follow this and we see that the flag is *CONJURO MISTICO DE OCULTACION* (in English: *MYSTICAL HIDING SPELL*). In the proper format:
+
+**FLAG{CONJUROMISTICODEOCULTACION}**
