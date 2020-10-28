@@ -5,8 +5,8 @@
 * [Web - Curvas Peligrosas](#web---curvas-peligrosas)
 * [Atomics - Hello World](#atomics---hello-world)
 * [Atomics - Demiguise](#atomics---demiguise)
-* [Atomics - Hexa](#atomics---helius5)
-* [Atomics - Helius 5](#atomics---hexa)
+* [Atomics - Hexa](#atomics---hexa)
+* [Atomics - Helius 5](#atomics---helius5)
 * [Atomics - Un Ciudadano Ejemplar](#atomics---un-ciudadano-ejemplar)
 
 
@@ -37,7 +37,7 @@ Toca ver el código y tratar de entender qué está ocurriendo. Podemos observar
 * La flag cifrada
 * 4 funciones
 * 7 líneas de código
-* 3 últimas líneas de código en un bloque if...else 
+* Un bloque if...else 
 
 El problema de todo esto es que el código parece estar bastante ofuscado, teniendo las variables y funciones nombres muy extraños. Toca entonces renombrarlos con Sublime para tratar de comprender qué hace el código. 
 Tras el proceso de *beautify* del script y dándome cuenta de que uno de los valores hardcodeados es *RightToLeft* cifrado (simplemente permite entender mejor que esa función lo que hace es invertir los caracteres), [este es el script resultante](./challs/clean.ps1).
@@ -46,11 +46,50 @@ Tras el proceso de *beautify* del script y dándome cuenta de que uno de los val
   <img src="imgs/misc/insomnia2.PNG">
 </p>
 
-
+Ya aquí es sencillo ver que la cuarta función nunca se ejecuta y que el proceso que sigue con lo que introducimos es **base64, fun1 (from base64 + XOR con 0x4c), reverse y base64 otra vez**. Entonces invirtiendo el proceso en [CyberChef](https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true)Reverse('Character')XOR(%7B'option':'Hex','string':'0x4c'%7D,'Standard',false)&input=TVcxL0lYd2ZLVHNORTM4K2VCTTVmRFUzZkg0OE9UZ2xMZz09) encontramos la flag del reto
  
 <p align="center">
   <img src="imgs/misc/insomnia_solution.PNG">
 </p>
 
-**FLAG{ECB_IS_NOT_SECURE}**
+**bitup20{y0u_4r3_AweS0m3!}**
+
+
+## Atomics - Hello World
+
+<p align="center">
+  <img src="imgs/atomics/hello_world.png">
+</p>
+
+Un **base64** muy evidente. <a href="https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true)&input=WW1sMGRYQXlNSHQxYmpSZmJuVXpkalJmTTJReFkyTXhNRzVmTUc1c01XNHpmUT09IA">Aquí</a> está la solución:
+
+**bitup20{un4_nu3v4_3d1cc10n_0nl1n3}**
+
+
+## Atomics - Demiguise
+
+<p align="center">
+  <img src="imgs/atomics/demiguise.png">
+</p>
+
+Era otro reto muy sencillo. Siguiendo la idea de la descrìpción, se podía encontrar la flag en el *código fuente* (no hice captura al resolverlo así que tomo la imagen del writeup de los creadores):
+
+<p align="center">
+  <img src="imgs/atomics/demiguise_solution.jpg">
+</p>
+
+**bitup20{lo_esencial_es_invisible_para_los_ojos}**
+
+
+## Atomics - Hexa
+
+<p align="center">
+  <img src="imgs/atomics/hexa.png">
+</p>
+
+El tercero de los retos simples de Atomics. Nos dicen que es un cifrado en **hexadecimal** así que lo resolvemos una vez más con <a href="https://gchq.github.io/CyberChef/#recipe=From_Hex('Space')&input=NjIgNjkgNzQgNzUgNzAgMzIgMzAgN2IgNmMgMzAgNWYgNzMgMzQgNjIgMzMgNmUgN2Q">CyberChef</a>.
+
+**bitup20{l0_s4b3n}**
+
+
 
