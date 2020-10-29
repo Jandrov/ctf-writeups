@@ -181,7 +181,7 @@ Bueno, este reto presenta una bonita historia y nos da un archivo de audio. Lo r
 **bitup20{CTHULHU}** (al parecer también valían *Cthulhu* y *cthulhu*)
 
 
-## Atomics - Un ciu
+## Atomics - Un Ciudadano Ejemplar
 
 Ficheros: <a href="challs/me.zip">me.zip</a>
 
