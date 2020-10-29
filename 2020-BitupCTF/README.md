@@ -92,4 +92,43 @@ El tercero de los retos simples de Atomics. Nos dicen que es un cifrado en **hex
 **bitup20{l0_s4b3n}**
 
 
+## Atomics - Helius 5
 
+Ficheros: <a href="challs/message.wav">message.wav</a>
+
+<p align="center">
+  <img src="imgs/atomics/helius_5.png">
+</p>
+
+Bueno, este reto presenta una bonita historia y nos da un archivo de audio. Lo reproducimos y parece **código morse**, lo cual concuerda con la historia de la descripción. Vamos a decodificarlo en [este sitio](https://morsecode.world/international/decoder/audio-decoder-adaptive.html) por comodidad:
+
+<p align="center">
+  <img src="imgs/atomics/helius5_solution.PNG">
+</p>
+
+**bitup20{CTHULHU}** (al parecer también valían *Cthulhu* y *cthulhu*)
+
+
+## Atomics - Un ciu
+
+Ficheros: <a href="challs/me.zip">me.zip</a>
+
+<p align="center">
+  <img src="imgs/atomics/un_ciudadano_ejemplar.png">
+</p>
+
+Nos dan un fichero comprimido que tras comprobar con los típicos comandos `file me.zip`, `7z l me.zip` y `zipnote me.zip`, que no hay nada raro, tratamos de descomprimirlo.
+
+Ahí vemos que los ficheros están protegidos con contraseña, así que tendremos que crackear el zip. Como en la descripción hablan del *rock*, mi primera idea fue buscar un wordlist de canciones de rock, pero luego resultó ser mucho más sencillo y era una referencia a **rockyou.txt**, el típico wordlist de Kali. De todos modos probando con el wordlist por defecto de **john** es capaz de extraer la simple contraseña **rabbit**. Antes de poder crackearlo hay que usar **zip2john** para extraer los hashes.
+
+<p align="center">
+  <img src="imgs/atomics/ciudadano1.PNG">
+</p>
+
+Una vez la tenemos, ya descomprimimos y en el fichero *flag.txt* tenemos la flag:
+
+<p align="center">
+  <img src="imgs/atomics/ciudadano_solution.PNG">
+</p>
+
+**bitup20{nunca_te_fies_de_las_apariencias}**
