@@ -6,7 +6,7 @@
 * [Atomics - Hello World](#atomics---hello-world)
 * [Atomics - Demiguise](#atomics---demiguise)
 * [Atomics - Hexa](#atomics---hexa)
-* [Atomics - Helius 5](#atomics---helius5)
+* [Atomics - Helius 5](#atomics---helius-5)
 * [Atomics - Un Ciudadano Ejemplar](#atomics---un-ciudadano-ejemplar)
 
 
