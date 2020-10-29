@@ -55,6 +55,78 @@ Ya aquí es sencillo ver que la cuarta función nunca se ejecuta y que el proces
 **bitup20{y0u_4r3_AweS0m3!}**
 
 
+## Web - Fintechno
+
+Ficheros: <a href="challs/a_sad_song.mp3">a_sad_song.mp3</a>
+
+<p align="center">
+  <img src="imgs/web/fintechno.png">
+</p>
+
+Examinamos con **file** el fichero que nos dan y resulta no ser un audio sino un texto:
+
+<p align="center">
+  <img src="imgs/web/fintechno2.PNG">
+</p>
+
+Lo abrimos y vemos una codificación que parece **base64** así que lo metemos en CyberChef. Ahí nos sugiere su herramienta automática que lo que queda es un fichero **SQLite**:
+
+<p align="center">
+  <img src="imgs/web/fintechno3.PNG">
+</p>
+
+Abrimos el fichero en Kali y vemos varias tablas:
+
+<p align="center">
+  <img src="imgs/web/fintechno4.PNG">
+</p>
+
+Viendo los registros de cada tabla con la típica query _select * from <tabla>_, nos encontramos con contenido sospechoso en la tabla **moz_places**:
+
+<p align="center">
+  <img src="imgs/web/fintechno1.PNG">
+</p>
+
+Aquí aparecen las webs del reto (al final la categoría es *Web*). Entramos a explorarlas un poco y tras perder algo el tiempo probando típicas acciones de web, decido ir siguiendo cada uno de los links de *moz_places* en orden, pues veo que aparece **oauth** en el proceso, y quizá se reutilice el token. En el proceso tenemos que crear una cuenta (con datos cualesquiera, pero obviamente nick SQLazo :P ) y tras el último link, podemos ver la flag. La razón es la previamente dicha: **No invalidan el token de OAUTH tras el primer uso**.
+
+<p align="center">
+  <img src="imgs/web/fintechno_solution.PNG">
+</p>
+
+**bitup20{R3us34uth0r1z4t10nT0k3nsIs4b4dId34}**
+
+
+## Web - Curvas Peligrosas
+
+<p align="center">
+  <img src="imgs/web/curvas_peligrosas.png">
+</p>
+
+Entramos a la web y vemos que piden hacer un login. Si no somos *admin*, dice que no podemos ver la flag, pero al tratar entrar como *admin*, sale un mensaje de error por no estar autorizados. Estudiamos la petición HTTP en el navegador y encontramos una **cookie** con un **JWT**. Lo abrimos [aquí](https://jwt.io/) y vemos que uno de los campos de la cabecera es `jku` con la url donde está su clave pública para verificar la firma. Vemos ahí y también en el JWT que es un cifrado [ES256](https://ldapwiki.com/wiki/ES256). 
+
+Para resolver el reto tuvimos que cambiar el token por uno con `"usuario" : "admin"` y que esa url a que apunte a nuestro servidor local. Ahí tendremos un fichero `jwks.json` con la clave pública que verifica la privada con la que firmaremos nuestro nuevo JWT. Yo en el proceso tuve algún problema con las claves de ES256 así que decidí generar una clave RS256 y hacer el mismo proceso cambiando el campo `alg` del JWT. De todos modos, se podía hacer con ES256 sin cambiar esto.
+
+Para generar claves tanto ES256 como RS256 (y otros más) se puede usar [este sitio](https://mkjwk.org/). Luego editando en jwt.io el token anterior que teníamos y firmando con nuestras nuevas claves, obtenemos esto:
+
+<p align="center">
+  <img src="imgs/web/curves1.PNG">
+</p>
+
+Esta es la clave que tenía en mi servidor local corriendo con ese comando que sale en pantalla:
+
+<p align="center">
+  <img src="imgs/web/curves2.PNG">
+</p>
+
+Ahora simplemente cambiando la cookie de la petición (se puede usar un proxy inverso como Burp, o simplemente *Editar y volver a enviar* desde Firefox) y reenviándola, podremos ver la flag.
+
+<p align="center">
+  <img src="imgs/web/curves_solution.PNG">
+</p>
+
+**bitup20{mas_peligrosas_que_la_cruz_verde}**
+
+
 ## Atomics - Hello World
 
 <p align="center">
@@ -132,76 +204,3 @@ Una vez la tenemos, ya descomprimimos y en el fichero *flag.txt* tenemos la flag
 </p>
 
 **bitup20{nunca_te_fies_de_las_apariencias}**
-
-
-## Web - Fintechno
-
-Ficheros: <a href="challs/a_sad_song.mp3">a_sad_song.mp3</a>
-
-<p align="center">
-  <img src="imgs/web/fintechno.png">
-</p>
-
-Examinamos con **file** el fichero que nos dan y resulta no ser un audio sino un texto:
-
-<p align="center">
-  <img src="imgs/web/fintechno2.PNG">
-</p>
-
-Lo abrimos y vemos una codificación que parece **base64** así que lo metemos en CyberChef. Ahí nos sugiere su herramienta automática que lo que queda es un fichero **SQLite**:
-
-<p align="center">
-  <img src="imgs/web/fintechno3.PNG">
-</p>
-
-Abrimos el fichero en Kali y vemos varias tablas:
-
-<p align="center">
-  <img src="imgs/web/fintechno4.PNG">
-</p>
-
-Viendo los registros de cada tabla con la típica query _select * from <tabla>_, nos encontramos con contenido sospechoso en la tabla **moz_places**:
-
-<p align="center">
-  <img src="imgs/web/fintechno1.PNG">
-</p>
-
-Aquí aparecen las webs del reto (al final la categoría es *Web*). Entramos a explorarlas un poco y tras perder algo el tiempo probando típicas acciones de web, decido ir siguiendo cada uno de los links de *moz_places* en orden, pues veo que aparece **oauth** en el proceso, y quizá se reutilice el token. En el proceso tenemos que crear una cuenta (con datos cualesquiera, pero obviamente nick SQLazo :P ) y tras el último link, podemos ver la flag. La razón es la previamente dicha: **No invalidan el token de OAUTH tras el primer uso**.
-
-<p align="center">
-  <img src="imgs/web/fintechno_solution.PNG">
-</p>
-
-**bitup20{R3us34uth0r1z4t10nT0k3nsIs4b4dId34}**
-
-
-## Web - Curvas Peligrosas
-
-<p align="center">
-  <img src="imgs/web/curvas_peligrosas.png">
-</p>
-
-Entramos a la web y vemos que piden hacer un login. Si no somos *admin*, dice que no podemos ver la flag, pero al tratar entrar como *admin*, sale un mensaje de error por no estar autorizados. Estudiamos la petición HTTP en el navegador y encontramos una **cookie** con un **JWT**. Lo abrimos [aquí](https://jwt.io/) y vemos que uno de los campos de la cabecera es `jku` con la url donde está su clave pública para verificar la firma. Vemos ahí y también en el JWT que es un cifrado [ES256](https://ldapwiki.com/wiki/ES256). 
-
-Para resolver el reto tuvimos que cambiar el token por uno con `"usuario" : "admin"` y que esa url a que apunte a nuestro servidor local. Ahí tendremos un fichero `jwks.json` con la clave pública que verifica la privada con la que firmaremos nuestro nuevo JWT. Yo en el proceso tuve algún problema con las claves de ES256 así que decidí generar una clave RS256 y hacer el mismo proceso cambiando el campo `alg` del JWT. De todos modos, se podía hacer con ES256 sin cambiar esto.
-
-Para generar claves tanto ES256 como RS256 (y otros más) se puede usar [este sitio](https://mkjwk.org/). Luego editando en jwt.io el token anterior que teníamos y firmando con nuestras nuevas claves, obtenemos esto:
-
-<p align="center">
-  <img src="imgs/web/curves1.PNG">
-</p>
-
-Esta es la clave que tenía en mi servidor local corriendo con ese comando que sale en pantalla:
-
-<p align="center">
-  <img src="imgs/web/curves2.PNG">
-</p>
-
-Ahora simplemente cambiando la cookie de la petición (se puede usar un proxy inverso como Burp, o simplemente *Editar y volver a enviar* desde Firefox) y reenviándola, podremos ver la flag.
-
-<p align="center">
-  <img src="imgs/web/curves_solution.PNG">
-</p>
-
-**bitup20{mas_peligrosas_que_la_cruz_verde}**
-
